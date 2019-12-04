@@ -41,7 +41,7 @@ namespace Workout_Tracker.Controllers
         {
             //string userId = Request.Cookies["UserID"];
             string userId = HttpContext.Session.GetString("userId");
-            int converted = Convert.ToInt32(userId);
+            
 
             List<Exercise>completedWorkoutExercises = context.Exercises.Where(c => c.WorkoutID == id && c.Workout.User.GoogleIdString == userId).Include(c => c.Workout).Include(c => c.Sets).ToList();
 

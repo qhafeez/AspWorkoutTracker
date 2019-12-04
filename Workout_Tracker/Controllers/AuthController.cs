@@ -32,7 +32,7 @@ namespace Workout_Tracker.Controllers
 
         public IActionResult Index()
         {
-            string parameters = "scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&include_granted_scopes=true&redirect_uri=https%3A%2F%2F"+local+ "%2FAuth%2FOauthred&response_type=code&&client_id=633847887848-k6033dv1eb2k5418mdabtfkn4n19m278.apps.googleusercontent.com";
+            string parameters = "scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&include_granted_scopes=true&redirect_uri=https%3A%2F%2F"+deployed+ "%2FAuth%2FOauthred&response_type=code&&client_id=633847887848-k6033dv1eb2k5418mdabtfkn4n19m278.apps.googleusercontent.com";
 
             return Redirect("https://accounts.google.com/o/oauth2/v2/auth?"+parameters);
         }
@@ -51,7 +51,7 @@ namespace Workout_Tracker.Controllers
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddParameter("application/x-www-form-urlencoded", "redirect_uri=https%3A%2F%2F" + local + "%2FAuth%2FOauthred&code=" + authCode+"&grant_type=authorization_code&client_id=633847887848-k6033dv1eb2k5418mdabtfkn4n19m278.apps.googleusercontent.com&client_secret=9SnPNF4XOjvPFX6UNO0tIAHA", ParameterType.RequestBody);
+            request.AddParameter("application/x-www-form-urlencoded", "redirect_uri=https%3A%2F%2F" + deployed + "%2FAuth%2FOauthred&code=" + authCode+"&grant_type=authorization_code&client_id=633847887848-k6033dv1eb2k5418mdabtfkn4n19m278.apps.googleusercontent.com&client_secret=9SnPNF4XOjvPFX6UNO0tIAHA", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
 
             return response.Content; 

@@ -99,10 +99,7 @@
                                     </div>
                                 </div>
 
-                                <div class="Exercise_completedSet" style={this.state.display ? {
-                                     display:"flex",
-                                     justifyContent:"center"
-                                     }:null}>
+                                <div class="Exercise_completedSet" >
                                     <div class="Exercise_completedSetInner">
                                         Completed @exercise.Name
                                     </div>
@@ -150,7 +147,7 @@
                     <div id="notesModal" class="Workout_Button" style='padding:"0px"' clicked={this.notesModalOpen} class={Workout_buttonPaddingLeft} btnType="Success">Notes</div>
                   
                     <form class="Workout_CompleteWorkoutForm" asp-controller="Workout" asp-action="CompleteWorkout" method="post">
-                   <div id="completeWorkout" class="Workout_Button" style='padding:"0px"'  btnType="Success">Complete Workout</div>
+                   <input type="submit" id="completeWorkout" class="Workout_Button" style='padding:"0px"'  btnType="Success" value="Complete Workout"/>
                       </form>
                     <!--
             <Icon onClick={this.selectorModalOpen} size={50} icon={plus} />
@@ -279,8 +276,8 @@
 
             $.ajax({
                 method: "POST",
-                url: "https://localhost:44327/workout/addRep",
-                //url: "https://aspworkouttracker.azurewebsites.net/workout/addRep",
+                //url: "https://localhost:44327/workout/addRep",
+                url: "https://aspworkouttracker.azurewebsites.net/workout/addRep",
                 contentType: "application/json",
                 data: JSON.stringify({ ExerciseID: exID, SetID: setID }),
                 dataType: "json",
@@ -333,8 +330,8 @@
 
                 $.ajax({
                      method: "POST",
-                    url: "https://localhost:44327/workout/addNotes",
-                    //url: "https://aspworkouttracker.azurewebsites.net/workout/addNotes",
+                    //url: "https://localhost:44327/workout/addNotes",
+                    url: "https://aspworkouttracker.azurewebsites.net/workout/addNotes",
                     contentType: "application/json",
                     data: JSON.stringify(notesViewModel),
                     dataType: "json",
@@ -383,9 +380,10 @@
         */
 
 
-        $(".Exercise_completedSet").click(function () {
-            $(this).css("display","none")
-        })
+        $(".Workout_exercisesContainer").on("click", ".Exercise_completedSet", function () {
+
+            $(this).css("display", "none")
+        });
 
 
 
@@ -415,8 +413,8 @@
 
                 $.ajax({
                     method: "POST",
-                    //url: "https://aspworkouttracker.azurewebsites.net/workout/WorkoutSelector",
-                    url: "https://localhost:44327/workout/WorkoutSelector",
+                    url: "https://aspworkouttracker.azurewebsites.net/workout/WorkoutSelector",
+                    //url: "https://localhost:44327/workout/WorkoutSelector",
                     contentType: "application/json",
                     data: JSON.stringify(addExerciseViewModel),
                     dataType: "json",

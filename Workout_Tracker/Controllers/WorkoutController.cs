@@ -259,10 +259,10 @@ namespace Workout_Tracker.Controllers
         [HttpPost]
         public IActionResult CompleteWorkout()
         {
-
+            string userId = HttpContext.Session.GetString("userId");
             //when completed this will get the current workout by retreiving the current 
             //workout that corresponds to the userID in the cookies
-            Workout currentWorkout = context.Workouts.Where(c => c.Completed == false).SingleOrDefault();
+            Workout currentWorkout = context.Workouts.Where(c => c.Completed == false && c.User.GoogleIdString == userId).SingleOrDefault();
 
             currentWorkout.Completed = true;
             context.SaveChanges();
