@@ -1,0 +1,124 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Workout_Tracker.ViewModels.HomePageViewModel;
+}
+
+
+    <div class="Home_Home">
+
+        <div class="Home_NameContainer">
+            <div>Welcome, @Model.Name</div>
+        </div>
+
+        <div class="Home_buttonContainer" >
+            <a asp-controller="Workout" asp-action="Index">
+                @if (Model.OnGoingWorkout == false)
+                {
+                    //add actions to go to create new workout action
+
+                    <i class="material-icons" style="font-size:200px; color:#1E73BB;">add_circle_outline</i>
+                }
+                else
+                {
+                    //add actions to go to ongoing workout action
+                    <i class="material-icons" style="font-size:200px; color:#1E73BB;">arrow_forward</i>
+                }
+
+                <Icon onClick={this.redirectHandler} size={200} icon={this.props.currentWorkout ? circle_right : circle_plus} />
+
+                <!-- the workout in the braces is dynamic.  will depend on whether a workout it currently underway or not -->
+
+            </a>
+
+           
+            <p> @(Model.OnGoingWorkout == true ? "Tap arrow to continue workout" : "Tap plus sign to add workout ")</p>
+        </div>
+
+
+        <div class="Home_onGoingWorkoutContainer">
+
+            
+
+            @if (Model.ExercisesToDisplay.Count != 0)
+            {
+            <div>
+                @if (Model.OnGoingWorkout == true)
+                {
+                    <span>Ongoing Workout</span>
+                }
+                else if (Model.OnGoingWorkout == false)
+                {
+                    <span>Most Recent Workout</span>
+                }
+               
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Weight</th>
+                            <th>Sets X Reps</th>
+                        </tr>
+                    </thead>
+                    <tbody class="SelectedExerciseRow">
+
+                        @foreach (var exercise in Model.ExercisesToDisplay)
+                        {
+                            <tr>
+                                <td>@exercise.Name</td>
+                                <td>@exercise.Weight</td>
+                                <td>@exercise.Sets.Count x @exercise.Sets.ElementAt(0).MaxReps</td>
+
+
+                            </tr>
+
+                        }
+
+                        <tr>
+                            <td>{props.exercise}</td>
+                            <td>{props.weight}</td>
+                            <td>{props.sets} x {props.reps}</td>
+
+
+                        </tr>
+                        <tr>
+                            <td>{props.exercise}</td>
+                            <td>{props.weight}</td>
+                            <td>{props.sets} x {props.reps}</td>
+
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            }
+            else if (Model.OnGoingWorkout == true)
+            {
+                <span>You have no exercises in your current workout.  Add some!</span>
+            }
+            else if (Model.OnGoingWorkout == false)
+            {
+                <span>You have no Completed Workouts</span>
+            }
+
+        </div>
+           
+
+
+
+            
+
+
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+<script>
+    let octicon = require("octicons");
+
+    console.log(octicon);
+
+</script>

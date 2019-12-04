@@ -1,0 +1,159 @@
+﻿@model Workout_Tracker.ViewModels.AddExerciseViewModel;
+
+
+
+
+    <div  class="Modal_Modal exerciseAddModal"
+         style={{
+						transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
+						opacity: this.props.show ? "1" : "0"}}>
+
+        <div class="WorkoutSelector_selectorContainer">
+
+            <div style="text-align:center">Choose Exercise</div>
+
+            <div class="WorkoutSelector_form"  >
+                
+
+                <div>
+
+                    <div class="WorkoutSelector_individualContainer">
+                        <label asp-for="ExerciseTypeID">Exercise</label>
+                        <select id="selectedExercise" asp-for="ExerciseTypeID" asp-items="Model.ExercisesTypes">
+
+                            <!--
+            <option value="Bench Press">Bench Press</option>
+            <option value="Row">Row</option>
+            <option value="RDL">RDL</option>
+            <option value="Lat Pulldown">Lat Pulldown</option>
+            <option value="Squat">Squat</option>
+            <option value="Calf Raises">Calf Raises</option>
+            <option value="Leg Press">Leg Press</option>
+            <option value="Shoulder Press">Shoulder Press</option>
+            <option value="Bicep Curl">Bicep Curl</option>
+            <option value="Triep Press">Tricep Press</option>
+                -->
+
+                        </select>
+
+                    </div>
+
+                    <div class="WorkoutSelector_individualContainer">
+                        <label asp-for="Weight"></label>
+                        <input id="weight" type="number" asp-for="Weight" />
+                    </div>
+
+
+                    <div class="WorkoutSelector_individualContainer">
+                        <label asp-for="Reps"></label>
+                        <input id="reps" type="number" asp-for="Reps" />
+                    </div>
+
+                    <div class="WorkoutSelector_individualContainer">
+                        <label asp-for="Sets"></label>
+                        <select id="selectedSets" asp-for="Sets">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+
+
+                </div>
+
+               
+               
+
+                <div class="WorkoutSelector_addingContainer">
+                    <Button id="addExerciseButton" btnType="Success" >Add Exercise</Button>
+                    <div style="color:red;" id="workoutStuff">
+                        {workoutStuff}
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style={{display:"flex", justifyContent:"center"}}>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script>
+
+
+        $(function () {
+
+           
+/*
+            $("#addExerciseButton").click(function () {
+
+                $addExerciseButton = $(this);
+                $reps = $("#reps").val();
+                $selectedExercise = $("#selectedExercise").val();
+                $selectedSets = $("#selectedSets").val();
+                $selectedWeight = $("#weight").val();
+                $workoutStuff = $("#workoutStuff");
+
+                var addExerciseViewModel = {
+
+                    Reps: $reps,
+                    Sets: $selectedSets,
+                    Weight: $selectedWeight,
+                    ExerciseTypeID: $selectedExercise
+
+
+                }
+
+
+
+                $.ajax({
+                     method: "POST",
+                    url: "https://localhost:44327/workout/WorkoutSelector",
+                    contentType: "application/json",
+                    data: JSON.stringify(addExerciseViewModel),
+                    dataType: "json",
+               
+                    success: function (data, status, jqxhr) {
+                        console.log(data);
+                        let div = "";
+                        if (data.success === false) {
+
+                            for (var i = 0; i < data.errors.length; i++) {
+                                div += "<div>" + data.errors[i].key + ": ";
+
+                                div += data.errors[i].errors[0].errorMessage;
+                                div += "</div>";
+
+                            }
+
+                           
+                        } else {
+
+                            div += "<div>Exercise Added</div>";
+
+                        }
+                         $workoutStuff.html(div);
+
+                       
+                        }
+
+                    })
+
+
+            })
+
+
+*/
+        })
+
+    </script>
+
+

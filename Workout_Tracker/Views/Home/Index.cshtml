@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="homepageContainer">
+        <div class="Auth">
+
+            <!--
+            <form asp-controller="Auth" asp-action="Login">
+                <input type="text" />
+                <input type="password" />
+
+            </form>
+           {authRedirect}
+            {errorMessage}
+            {/*<form>
+                {form}
+                <Button style={{margin:"0px"}} btnType="Success">Submit</Button>
+            </form>
+            <Button style={{margin:"0px"}} btnType="Danger" clicked={this.switchAuthModeHandler}>SWITCH TO {this.state.isSignUp ? "Sign In" : "SIGN UP"}</Button>*/}
+            -->
+
+            <a asp-controller="Auth" asp-action="Index"><div className={classes.googleButton}>Login with Google</div></a>
+            <!--<a href="https://workout-tracker-qh.herokuapp.com/google"><div class="googleButton">Login with Google</div></a>-->
+
+        </div>
+        <div class="appInfoContainer">
+
+            <div class="heading">
+                Workout Tracker
+            </div>
+            <div>
+                <img src="~/images/appScreenshot.png" />
+            </div>
+            <div>
+                <ul class="homepageul">
+                    <li class="homepageli">Track your workouts!</li>
+                    <li class="homepageli">Keep track of sets and reps!</li>
+                    <li class="homepageli">Write notes about your workout! "Too easy, up the weight next time"</li>
+                    <li class="homepageli">Look back at your history and see how far you've progressed!</li>
+
+
+                </ul>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+

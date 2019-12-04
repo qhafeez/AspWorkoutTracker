@@ -1,0 +1,159 @@
+﻿
+@{
+    @model List<Workout_Tracker.Models.Exercise>;
+}
+
+
+
+    <div class="Workout_mainContainer">
+
+        <div class="Workout_selectorContainer">
+
+            <div class="Workout_exercisesContainer">
+
+                
+
+                <div>@Model.ElementAt(0).Workout.Date.Month / @Model.ElementAt(0).Workout.Date.Day / @Model.ElementAt(0).Workout.Date.Year </div>
+
+
+                <div class="Workout_innerExerciseContainer">
+
+                    @foreach (var exercise in Model)
+                    {
+
+                        <!-- beginning of the list of exercises in the workout.  will loop over data to create multiple of these-->
+                        <div class="Exercise_individualExerciseContainer">
+
+                            <div>
+                                <div class="Exercise_exerInfoContainer">
+                                    <div>@exercise.Name</div>
+                                    <div class="Exercise_setsWeightContainer">
+                                        <div class="Exercise_setsRepsContainer">@exercise.Sets.Count x @exercise.Sets.ElementAt(0).MaxReps </div>
+                                        <div>@exercise.Weight lbs</div>
+                                    </div>
+                                </div>
+                                <div class="Exercise_setSection">
+
+                                    @{
+                                        string style = "Exercise_setsContainer ";
+
+
+                                        switch (exercise.Sets.Count)
+                                        {
+
+                                            case 1:
+                                                style = style + "Exercise_oneSet";
+                                                break;
+
+                                            case 2:
+                                                style = style + "Exercise_twoSet";
+                                                break;
+
+                                            case 3:
+                                                style = style + "Exercise_threeSet";
+                                                break;
+
+                                            case 4:
+                                                style = style + "Exercise_fourSet";
+                                                break;
+
+                                            case 5:
+                                                style = style + "Exercise_fiveSet";
+                                                break;
+
+                                            default:
+                                                style = "hello";
+                                                break;
+                                        }
+
+                                    }
+                                    <!--write a function that selects the class based on how many sets there are-->
+                                    <div class="@style">
+
+
+                                        <!-- beginning of the list of set components.  will loop over to create the appropriate amount of
+                        sets-->
+                                        @foreach (var set in exercise.Sets)
+                                        {
+
+                                            int id = set.ID;
+                                            <div class="Set_set Set_noCursor" data-exID="@exercise.ID" data-id="@id" data-reps="@set.Reps">
+                                                <!--use jquery to get the id of the set and send it to the approprati controller.
+                                response will update the div.
+                                   perhaps have the data return the completed status of the workout and
+                                   display completed div if appropriate-->
+
+                                                <div class="Set_rep">@set.Reps</div>
+
+                                            </div>
+
+                                        }
+
+
+                                    </div>
+
+
+
+                                    <!-- end of the sets loop-->
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+                        <!--end of exercises list loop-->
+
+
+
+                    }
+
+
+                    <div class="Workout_NotesContainer">
+                        <div class="Workout_NotesTitle">Notes</div>
+                        <div class="Workout_Notes">@Model.ElementAt(0).Workout.Notes</div>
+                    </div>
+                        
+                        <form id="deleteForm"  asp-controller="History" asp-action="DeleteWorkout" method="post">
+                            <input type="hidden" name="id" value="@Model.ElementAt(0).WorkoutID"/>
+                            <input  type="submit" class="Workout_Delete" value="Delete" />
+                            
+                        </form>
+                </div>
+
+
+                
+            </div>
+
+            </div>
+ </div>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+<script>
+
+    $("#deleteForm").submit(function () {
+        return confirm("Are you sure you want to delete this workout?");
+    });
+
+    /*
+    $(".Workout_Delete").click(function () {
+        let $workoutID = $(this).attr("data-workoutID");
+
+        let r = confirm("Are you sure you want to delete");
+        if (r === true) {
+
+            $.ajax({
+                method: "POST",
+                url: "https://localhost:44327/history/DeleteWorkout",
+                contentType: "application/json",
+                data: JSON.stringify({ ID: $workoutID }),
+                dataType: "json"
+            });
+
+        }
+    })    */
+</script>

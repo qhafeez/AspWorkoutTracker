@@ -1,0 +1,29 @@
+﻿.WorkoutSelector_selectorContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+    flex-direction: column;
+}
+
+.WorkoutSelector_form {
+    margin: 0 5%;
+}
+
+.WorkoutSelector_individualContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    border-bottom: 1px solid lightgray;
+    align-items: center;
+}
+
+.WorkoutSelector_selectorContainer input[type="text"] {
+    text-align: center;
+}
+
+.WorkoutSelector_addingContainer {
+    display: flex;
+    align-items: center;
+}

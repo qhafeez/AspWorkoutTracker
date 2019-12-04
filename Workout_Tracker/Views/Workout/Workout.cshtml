@@ -1,0 +1,539 @@
+﻿
+@{
+    @model Workout_Tracker.ViewModels.WorkoutViewModel
+}
+
+
+    <div class="Workout_mainContainer">
+
+        <div class="Workout_selectorContainer">
+
+
+            <div class="Workout_exercisesContainer">
+
+               
+
+                <div>@Model.Workout.Date.Month / @Model.Workout.Date.Day/ @Model.Workout.Date.Year </div>
+
+
+                <div class="Workout_innerExerciseContainer">
+                    @if (Model.exerciseList.Count > 0)
+                    {
+                        @foreach (var exercise in Model.exerciseList)
+                        {
+
+                            <!-- beginning of the list of exercises in the workout.  will loop over data to create multiple of these-->
+                            <div class="Exercise_individualExerciseContainer">
+
+                                <div>
+                                    <div class="Exercise_exerInfoContainer">
+                                        <div>@exercise.Name</div>
+                                        <div class="Exercise_setsWeightContainer">
+                                            <div class="Exercise_setsRepsContainer">@exercise.Sets.Count x @exercise.Sets.ElementAt(0).MaxReps </div>
+                                            <div>@exercise.Weight lbs</div>
+                                        </div>
+                                    </div>
+                                    <div class="Exercise_setSection">
+
+                                        @{
+                                            string style = "Exercise_setsContainer ";
+
+
+                                            switch (exercise.Sets.Count)
+                                            {
+
+                                                case 1:
+                                                    style = style + "Exercise_oneSet";
+                                                    break;
+
+                                                case 2:
+                                                    style = style + "Exercise_twoSet";
+                                                    break;
+
+                                                case 3:
+                                                    style = style + "Exercise_threeSet";
+                                                    break;
+
+                                                case 4:
+                                                    style = style + "Exercise_fourSet";
+                                                    break;
+
+                                                case 5:
+                                                    style = style + "Exercise_fiveSet";
+                                                    break;
+
+                                                default:
+                                                    style = "hello";
+                                                    break;
+                                            }
+
+                                        }
+                                        <!--write a function that selects the class based on how many sets there are-->
+                                        <div class="@style">
+
+
+                                            <!-- beginning of the list of set components.  will loop over to create the appropriate amount of
+                            sets-->
+                                            @foreach (var set in exercise.Sets)
+                                            {
+
+                                                int id = set.ID;
+                                                <div class="Set_set" data-exID="@exercise.ID" data-id="@id" data-reps="@set.Reps">
+                                                    <!--use jquery to get the id of the set and send it to the approprati controller.
+                                    response will update the div.
+                                       perhaps have the data return the completed status of the workout and
+                                       display completed div if appropriate-->
+
+                                                    <div class="Set_rep">@set.Reps</div>
+
+                                                </div>
+
+                                            }
+
+
+                                        </div>
+
+
+
+                                        <!-- end of the sets loop-->
+                                    </div>
+                                </div>
+
+                                <div class="Exercise_completedSet" style={this.state.display ? {
+                                     display:"flex",
+                                     justifyContent:"center"
+                                     }:null}>
+                                    <div class="Exercise_completedSetInner">
+                                        Completed @exercise.Name
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                            <!--end of exercises list loop-->
+
+
+
+                        }
+
+                    }
+
+                    else
+                    {
+
+                        <div id="pleaseAdd">Please add an exercise</div>
+
+                    }
+
+                </div>
+
+                                      
+            </div>
+
+
+
+            <div class="Workout_buttonContainer">
+
+
+
+
+                <div class="Workout_innerContainer">
+
+
+
+                    <div id="exerciseModal" class="Workout_Button" style='marginLeft:"10px",padding:"0px"' clicked={this.props.openExerciseModal} btnType="Success">Add Exercise</div>
+                    <div id="notesModal" class="Workout_Button" style='padding:"0px"' clicked={this.notesModalOpen} class={Workout_buttonPaddingLeft} btnType="Success">Notes</div>
+                  
+                    <form class="Workout_CompleteWorkoutForm" asp-controller="Workout" asp-action="CompleteWorkout" method="post">
+                   <div id="completeWorkout" class="Workout_Button" style='padding:"0px"'  btnType="Success">Complete Workout</div>
+                      </form>
+                    <!--
+            <Icon onClick={this.selectorModalOpen} size={50} icon={plus} />
+            <Icon onClick={this.modalOpen} size={50} icon={pen_3} />
+            <Icon onClick={this.completeWorkout} size={50} icon={square_ok} />*/}
+                -->
+
+
+                </div>
+            </div>
+
+
+            <!--beginning of exercise selector modal-->
+            @Html.Partial("_WorkoutSelector", Model.addExerciseViewModel);
+
+
+
+
+
+
+
+            <!--end of exercise selector modal-->
+
+            <div class="Modal_Modal notesModal">
+
+                <div class="Workout_doneContainer">
+                    <div id="notesDone" >DONE</div>
+                </div>
+
+                <textarea class="Workout_textarea" value="" asp-for="notesViewModel.Notes" onChange={this.textHandler}>
+                    
+                        @Model.notesViewModel.Notes
+
+                </textarea>
+
+
+            </div>
+
+
+            <!--
+            <Modal show={this.props.exerciseModalShow} modalClosed={this.props.exerciseModalClose}>
+
+                <WorkoutSelector closeModal={this.props.exerciseModalClose} />
+
+            </Modal>
+
+            <Modal show={this.state.notesModalShow} modalClosed={this.notesUpdateHandler}>
+
+                <div class="Workout_doneContainer">
+                    <div onClick={this.notesUpdateHandler}>DONE</div>
+
+                </div>
+
+                <textarea value={this.state.notes} onChange={this.textHandler}></textarea>
+
+
+            </Modal>
+    -->
+        </div>
+        </div>
+        <div class="Backdrop_Backdrop"></div>
+    
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+        /*let getWorkout = function () {
+            let url = "https://localhost:44327/workout?id=1";
+            $.get(url).always(showResponse);
+            return false;
+        };*/
+
+        let showResponse = function (object) {
+            $("body").text(JSON.stringify(object, null, 4));
+        };
+
+        /* let getWorkout = function () {
+             let url = "https://localhost:44327/addRep";
+             $.ajax
+             return false;
+         };
+         */
+
+        $("#exerciseModal").click(function () {
+
+            $(".Backdrop_Backdrop").css("display", "block");
+            $(".exerciseAddModal").css("display", "block");
+
+            console.log("hello");
+
+        });
+
+        $("#notesModal").click(function () {
+
+            $(".Backdrop_Backdrop").css("display", "block");
+            $(".notesModal").css("display", "block");
+
+            console.log("hello");
+
+        });
+
+        $("#notesDone").click(function () {
+
+            $(".Backdrop_Backdrop").css("display", "none");
+            $(".notesModal").css("display", "none");
+
+
+
+        })
+
+        $(".Backdrop_Backdrop").click(function () {
+
+           
+
+            $(this).css("display", "none");
+            $(".Modal_Modal").css("display", "none");
+
+        });
+
+
+
+        $(".Workout_exercisesContainer").on("click", ".Set_set",function () {
+
+            let setID = $(this).attr("data-id");
+            let exID = $(this).attr("data-exID");
+            $setset = $(this);
+
+            $.ajax({
+                method: "POST",
+                url: "https://localhost:44327/workout/addRep",
+                //url: "https://aspworkouttracker.azurewebsites.net/workout/addRep",
+                contentType: "application/json",
+                data: JSON.stringify({ ExerciseID: exID, SetID: setID }),
+                dataType: "json",
+               
+                success: function (data, status, jqxhr) {
+                    console.log(data);
+                    $setset.children(".Set_rep").text(data[1].reps);
+
+                    if (data[0].completed === true) {
+
+                        $setset.closest(".Exercise_individualExerciseContainer").find(".Exercise_completedSet").css({
+                            "display": "flex",
+                            "justify-content": "center"
+                        });  
+
+                    }
+                        console.log(status);
+                    }
+
+            })
+
+
+                
+
+               /* 
+                $.get("https://localhost:44327/workout/WorkoutSelector", function (data) {
+                    console.log("workout SElector")
+                    console.log(data)
+                })*/
+               
+
+                  
+        }
+        )
+
+
+        $("#notesDone").click(function () {
+
+            let $notes = $(".Workout_textarea").val();
+
+                var notesViewModel = {
+
+
+                    Notes: $notes
+
+
+                }
+
+
+
+                $.ajax({
+                     method: "POST",
+                    url: "https://localhost:44327/workout/addNotes",
+                    //url: "https://aspworkouttracker.azurewebsites.net/workout/addNotes",
+                    contentType: "application/json",
+                    data: JSON.stringify(notesViewModel),
+                    dataType: "json",
+               
+                    success: function (data, status, jqxhr) {
+                        console.log(data);
+                        let div = "";
+                        if (data.success === false) {
+
+                            alert("Something Went Wrong.");
+
+                           
+                        } else {
+
+                            $("#notesDone").click(function () {
+
+                                $(".Backdrop_Backdrop").css("display", "none");
+                                    $(".notesModal").css("display", "none");
+
+
+
+                            })
+
+                        }
+
+                        alert("Notes updated successfully.");
+
+                       
+                        }
+
+                    })
+
+
+        })
+
+        /*
+        $("#completeWorkout").click(function () {
+
+            $.ajax({
+                method: "POST",
+                url: "https://localhost:44327/workout/CompleteWorkout"
+                
+            })
+
+        })
+        */
+
+
+        $(".Exercise_completedSet").click(function () {
+            $(this).css("display","none")
+        })
+
+
+
+
+         $("#addExerciseButton").click(function () {
+
+                $addExerciseButton = $(this);
+                $reps = $("#reps").val();
+                $selectedExercise = $("#selectedExercise").val();
+                $selectedSets = $("#selectedSets").val();
+                $selectedWeight = $("#weight").val();
+             $workoutStuff = $("#workoutStuff");
+
+             $workoutStuff.html("...");
+
+                var addExerciseViewModel = {
+
+                    Reps: $reps,
+                    Sets: $selectedSets,
+                    Weight: $selectedWeight,
+                    ExerciseTypeID: $selectedExercise
+
+
+                }
+
+
+
+                $.ajax({
+                    method: "POST",
+                    //url: "https://aspworkouttracker.azurewebsites.net/workout/WorkoutSelector",
+                    url: "https://localhost:44327/workout/WorkoutSelector",
+                    contentType: "application/json",
+                    data: JSON.stringify(addExerciseViewModel),
+                    dataType: "json",
+               
+                    success: function (data, status, jqxhr) {
+                        console.log(data);
+                        let div = "";
+                        let latest = "";
+                        if (data.success === false) {
+
+                            for (var i = 0; i < data.errors.length; i++) {
+                                div += "<div>" + data.errors[i].key + ": ";
+
+                                div += data.errors[i].errors[0].errorMessage;
+                                div += "</div>";
+
+                            }
+
+                           
+                        } else {
+                            console.log(data);
+                            div += "<div>Exercise Added</div>";
+
+                            latest += ' <div class="Exercise_individualExerciseContainer">';
+
+                            latest += '<div>';
+                            latest += '<div class="Exercise_exerInfoContainer">';
+                            latest += '<div>' + data.exercise.name + '</div>';
+                            latest += '<div class="Exercise_setsWeightContainer">';
+                            latest += '<div class="Exercise_setsRepsContainer">' + data.exercise.sets.length + 'x' + data.exercise.sets[0].maxReps + '</div>';
+                            latest += '<div>' + data.exercise.weight + 'lbs</div>';
+                            latest += '</div>';
+                            latest += '</div>';
+                            latest += '<div class="Exercise_setSection">';
+
+                                   
+                    let style = "Exercise_setsContainer ";
+
+
+                    switch (data.exercise.sets.length)
+                    {
+
+                        case 1:
+                            style = style + "Exercise_oneSet";
+                            break;
+
+                        case 2:
+                            style = style + "Exercise_twoSet";
+                            break;
+
+                        case 3:
+                            style = style + "Exercise_threeSet";
+                            break;
+
+                        case 4:
+                            style = style + "Exercise_fourSet";
+                            break;
+
+                        case 5:
+                            style = style + "Exercise_fiveSet";
+                            break;
+
+                        default:
+                            style = "hello";
+                            break;
+                    }
+
+                                    
+
+                                   
+                            latest += '<div class="' + style + '"</div>';
+
+
+                                      
+
+                            data.exercise.sets.forEach(function (set) {
+                                let id = set.id;
+
+                                latest += '<div class="Set_set" data-exID=' + set.exerciseID + ' data-id="' + set.id + '" data-reps="' + set.reps + '">';
+                                latest += '<div class="Set_rep">' + set.reps + '</div>';
+                                latest += '</div>';
+
+
+                            });
+                            //end of the sets loop
+                            
+
+                            latest += '</div>';
+                            latest += '</div>';
+                            latest += '</div>';
+
+
+                            latest += '<div class="Exercise_completedSet">';
+                            latest += '<div class="Exercise_completedSetInner">';
+                            latest += "Completed" + data.exercise.name;
+                            latest += "</div>";
+                            latest += "</div>";
+
+                            latest += "</div>";
+
+                        }
+                        $workoutStuff.html(div);
+
+                        //this removes the "please add exercise div if it is present"
+                        $("body").find("#pleaseAdd").remove();
+
+                        //
+                        $(".Workout_innerExerciseContainer").append(latest);
+                       
+                        }
+
+                    })
+
+
+            })
+
+
+    })
+
+</script>

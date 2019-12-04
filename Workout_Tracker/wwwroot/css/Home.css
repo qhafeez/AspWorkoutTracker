@@ -1,0 +1,24 @@
+﻿.Home_Home {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.Home_NameContainer {
+display:flex;
+justify-content:center;
+padding-top:20px;
+padding-bottom:20px;
+font-size: 20px;
+
+}
+
+.Home_buttonContainer {
+    padding-top: 50px;
+    //cursor: pointer;
+}
+
+.Home_onGoingWorkoutContainer {
+    display: flex;
+    justify-content: center;
+}

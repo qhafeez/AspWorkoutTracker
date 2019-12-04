@@ -1,0 +1,100 @@
+﻿
+
+.Exercise_exerInfoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #2C74B7;
+    color: white;
+    border-radius: 5px 5px 0px 0px;
+}
+
+
+
+.Exercise_individualExerciseContainer {
+    margin: 5px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px lightgray;
+    justify-content: center;
+    box-sizing: content-box;
+    position: relative;
+}
+
+.Exercise_completedSet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    display: none;
+    cursor: pointer;
+}
+
+.Exercise_completedSetInner {
+    justify-content: center;
+    align-self: center;
+    font-size: 30px;
+}
+
+
+.Exercise_individualExerciseContainer:last-of-type {
+    margin-bottom: 58px;
+}
+
+
+
+.Exercise_setSection {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    padding: 20px 0px 20px 0px;
+    font-size: 30px;
+}
+
+
+
+.Exercise_setsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.Exercise_setsWeightContainer {
+    display: flex;
+}
+
+.Exercise_setsRepsContainer {
+    padding-right: 10px;
+}
+
+
+.Exercise_oneSet {
+    justify-content: center;
+}
+
+.Exercise_twoSet {
+    width: 50%;
+    justify-content: space-between;
+}
+
+.Exercise_threeSet {
+    width: 70%;
+    justify-content: space-between;
+}
+
+.Exercise_fourSet {
+    width: 80%;
+    justify-content: space-between;
+}
+
+.Exercise_fiveSet {
+    width: 90%;
+    justify-content: space-between;
+}
+
+.Exercise_removeContainer {
+    display: flex;
+    justify-content: flex-end;
+}

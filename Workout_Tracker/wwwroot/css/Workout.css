@@ -1,0 +1,161 @@
+﻿.Workout_Delete {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Workout_NotesContainer {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    
+}
+
+.Workout_Notes {
+    
+    
+    padding:10px;
+    background-color:white;
+    width: 90%;
+    max-height:100px;
+    overflow-y:scroll;
+
+}
+
+.Workout_mainContainer {
+    display: flex;
+    justify-content: center;
+    background-color: #F5F5F5;
+}
+
+.Workout_selectorContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    /*margin:auto;*/
+    background-color: #F5F5F5;
+    /*margin-top:-17px;*/
+    height: calc(100vh - 56px);
+    overflow-x: hidden;
+    position: relative;
+    /*justify-items:center;*/
+}
+
+.Workout_empty {
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: white;
+    /*align-self: bottom;*/
+    position: absolute;
+    top: 25%;
+}
+
+.Workout_exercisesContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*overflow:scroll;*/
+}
+
+.Workout_innerExerciseContainer {
+    /*overflow: scroll;*/
+}
+
+.Workout_buttonContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #F2F2F2;
+    //height: 40px;
+       
+}
+
+.Workout_innerContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+/*.openContainer{
+
+	display: flex;
+	flex-direction:column;
+	align-items: flex-start;
+
+
+}*/
+
+.Workout_textarea {
+    width: 99%;
+    height: 82%;
+    font-size: 18px;
+    border: none;
+}
+
+textarea:focus {
+    border: none;
+}
+
+.Workout_doneContainer {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.Workout_textAreaContainer {
+    width: 99%;
+    height: 85%;
+}
+
+.Workout_buttonPaddingLeft {
+    padding-left: 10px;
+}
+
+.Workout_CompleteWorkoutForm {
+    display:flex;
+   
+
+}
+
+.Workout_Button {
+    background-color: transparent;
+    border: none;
+    color: #14558c;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+@media (min-width:813px) {
+
+    .Workout_selectorContainer {
+        width: 50%;
+        max-width: 530px;
+    }
+
+    .Workout_buttonContainer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        background-color: #F2F2F2;
+        height: 58px;
+    }
+}

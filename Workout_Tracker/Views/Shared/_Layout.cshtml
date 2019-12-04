@@ -1,0 +1,223 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Workout_Tracker</title>
+
+
+
+    <environment include="Development">
+        <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+        <link rel="stylesheet" href="~/css/normalize.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/homepage.css" />
+        <link rel="stylesheet" href="~/css/toolbar.css" />
+        <link rel="stylesheet" href="~/css/DrawerToggle.css" />
+        <link rel="stylesheet" href="~/css/NavigationItems.css" />
+        <link rel="stylesheet" href="~/css/NavigationItem.css" />
+        <link rel="stylesheet" href="~/css/Home.css" />
+        <link rel="stylesheet" href="~/css/Workout.css" />
+        <link rel="stylesheet" href="~/css/SelectedExerciseRow.css" />
+        <link rel="stylesheet" href="~/css/Set.css" />
+        <link rel="stylesheet" href="~/css/Exercise.css" />
+        <link rel="stylesheet" href="~/css/Modal.css" />
+        <link rel="stylesheet" href="~/css/WorkoutSelector.css" />
+        <link rel="stylesheet" href="~/css/Backdrop.css" />
+        <link rel="stylesheet" href="~/css/History.css" />
+        <link rel="stylesheet" href="~/css/SideDrawer.css" />
+
+
+    </environment>
+    <environment exclude="Development">
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+           asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+           asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />-->
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/normalize.css" />
+
+        <link rel="stylesheet" href="~/css/homepage.css" />
+        <link rel="stylesheet" href="~/css/toolbar.css" />
+        <link rel="stylesheet" href="~/css/DrawerToggle.css" />
+        <link rel="stylesheet" href="~/css/NavigationItems.css" />
+        <link rel="stylesheet" href="~/css/NavigationItem.css" />
+        <link rel="stylesheet" href="~/css/Home.css" />
+        <link rel="stylesheet" href="~/css/Workout.css" />
+        <link rel="stylesheet" href="~/css/SelectedExerciseRow.css" />
+        <link rel="stylesheet" href="~/css/Set.css" />
+        <link rel="stylesheet" href="~/css/Exercise.css" />
+        <link rel="stylesheet" href="~/css/Modal.css" />
+        <link rel="stylesheet" href="~/css/WorkoutSelector.css" />
+        <link rel="stylesheet" href="~/css/Backdrop.css" />
+        <link rel="stylesheet" href="~/css/History.css" />
+        <link rel="stylesheet" href="~/css/SideDrawer.css" />
+    </environment>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+</head>
+<body>
+
+    <header class="ToolbarToolbar">
+
+
+        <div class="DrawerToggle" onClick={props.clicked}>
+
+            <div></div>
+            <div></div>
+            <div></div>
+
+        </div>
+
+        <div class="ToolbarLogo">
+            <div class="Logo_Logo">
+                <img src="~/images/barbell.png" alt="MyBarbellLogo" />
+            </div>
+        </div>
+
+        <nav class="ToolbarDesktopOnly">
+            <ul class="NavigationItems_NavigationItems">
+
+                <li class="NavigationItem_NavigationItem">
+
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                @if (Context.Session.GetString("userId") != null)
+                {
+                    <li class="NavigationItem_NavigationItem">
+                        <a asp-controller="History" asp-action="Index">History</a>
+                    </li>
+                    <li class="NavigationItem_NavigationItem">
+
+                        <a asp-controller="Auth" asp-action="LogOut">Logout</a>
+                    </li>
+                }
+
+            </ul>
+
+
+
+        </nav>
+
+    </header>
+
+    <div class="Backdrop_Backdrop"></div>
+    <!--the classes are sidrawer open and sidedrawer close fo the div below-->
+    <div id="SideDrawer" class="SideDrawer_SideDrawer  SideDrawer_Close">
+
+        <div class="SideDrawer_Logo">
+
+            <div class="Logo_Logo">
+                <img src="~/images/barbell.png" alt="MyBurgerLogo" />
+            </div>
+        </div>
+
+        <nav>
+            <ul class="NavigationItems_NavigationItems">
+                <li class="NavigationItem_NavigationItem">
+                    <a asp-controller="Home" asp-action="HomePage">Home</a>
+                </li>
+
+
+                @{
+
+                    if (Context.Session.GetString("userId") != null)
+                    {
+                        <li class="NavigationItem_NavigationItem">
+                            <a asp-controller="History" asp-action="Index">History</a>
+                        </li>
+                        <li class="NavigationItem_NavigationItem">
+                            <a asp-controller="Auth" asp-action="LogOut">Logout</a>
+                        </li>
+
+                    }
+
+                }
+
+
+
+            </ul>
+        </nav>
+
+    </div>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <!--    <hr />
+
+        <footer>
+                <p>&copy; 2019 - Workout_Tracker</p>
+            </footer>
+            -->
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<script>
+    $(".DrawerToggle").click(function () {
+
+        let $sd = $("#SideDrawer");
+        if ($(".Backdrop_Backdrop").css("display") === "none") {
+            $(".Backdrop_Backdrop").css("display", "block");
+
+        } else {
+            $(".Backdrop_Backdrop").css("display", "none");
+
+        }
+
+        if ($sd.hasClass("SideDrawer_Open")) {
+            $sd.removeClass("SideDrawer_Open");
+            $sd.addClass("SideDrawer_Close");
+        } else {
+            $sd.removeClass("SideDrawer_Close");
+            $sd.addClass("SideDrawer_Open");
+
+        }
+
+    });
+
+    $(".Backdrop_Backdrop").click(function () {
+
+        $(".Backdrop_Backdrop").css("display", "none");
+        $("#SideDrawer").removeClass("SideDrawer_Open");
+        $("#SideDrawer").addClass("SideDrawer_Close");
+
+    })
+
+
+
+
+
+</script>

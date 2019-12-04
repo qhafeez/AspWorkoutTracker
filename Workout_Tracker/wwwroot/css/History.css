@@ -1,0 +1,66 @@
+﻿.History_mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F5F5F5;
+}
+
+.History_historyContainer {
+    background-color: #F5F5F5;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.History_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.History_paginationContainer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #F5F5F5;
+}
+
+
+.History_historyContainer a:link {
+    text-decoration:none;
+    color:black;
+}
+
+.History_historyContainer a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.HistoryComponent_mainContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+    font: 20px arial;
+    background-color: white;
+    margin: 15px 5px 0px 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px lightgray;
+    cursor: pointer;
+}
+
+.History_Component_a {
+    color: black;
+}
+
+
+
+@media (min-width:813px) {
+
+    .History_historyContainer {
+        width: 50%;
+        max-width: 530px;
+    }
+}

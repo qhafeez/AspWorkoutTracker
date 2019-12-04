@@ -1,0 +1,33 @@
+﻿.NavigationItems_NavigationItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+
+
+.NavigationItems_workoutControls {
+    display: block;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+
+
+@media (min-width: 813px) {
+
+    .NavigationItems_NavigationItems {
+        flex-flow: row;
+    }
+
+    .NavigationItems_workoutControls {
+        display: none;
+    }
+}
